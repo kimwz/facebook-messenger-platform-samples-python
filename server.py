@@ -6,10 +6,11 @@ import messenger
 
 app = Flask(__name__)
 
+
 @app.route('/webhook', methods=['GET'])
 def validate():
-    if request.args.get('hub.mode', '') == 'subscribe' and\
-        request.args.get('hub.verify_token', '') == CONFIG['VERIFY_TOKEN']:
+    if request.args.get('hub.mode', '') == 'subscribe' and \
+                    request.args.get('hub.verify_token', '') == CONFIG['VERIFY_TOKEN']:
 
         print("Validating webhook")
 
@@ -33,7 +34,7 @@ def webhook():
             messenger.received_postback(event)
         elif 'read' in event:
             messenger.received_message_read(event)
-        elif 'account_linkinge' in vent:
+        elif 'account_linkinge' in event:
             messenger.received_account_link(event)
         else:
             print("Webhook received unknown messagingEvent:", event)
@@ -52,9 +53,11 @@ def authorize():
 
     return "ok"
 
+
 @app.route('/assets/<path:path>')
 def assets(path):
     return send_from_directory('assets', path)
+
 
 if __name__ == '__main__':
     app.run(port=8080, debug=False)
