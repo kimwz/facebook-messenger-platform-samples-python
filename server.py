@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from flask import Flask, request, send_from_directory
+from flask import Flask, request, send_from_directory, render_template
 from config import CONFIG
 import messenger
 
@@ -51,7 +51,11 @@ def authorize():
 
     redirect_uri_success = redirect_uri + "&authorization_code=" + auth_code
 
-    return "ok"
+    return render_template('authorize.html', {
+        'account_linking_token': account_linking_token,
+        'redirect_uri': redirect_uri,
+        'redirect_uri_success': redirect_uri_success
+    })
 
 
 @app.route('/assets/<path:path>')
