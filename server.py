@@ -34,7 +34,7 @@ def webhook():
             messenger.received_postback(event)
         elif 'read' in event:
             messenger.received_message_read(event)
-        elif 'account_linkinge' in event:
+        elif 'account_linking' in event:
             messenger.received_account_link(event)
         else:
             print("Webhook received unknown messagingEvent:", event)

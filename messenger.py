@@ -2,7 +2,7 @@ import json
 import requests
 from config import CONFIG
 
-
+USER_SEQ = {}
 def messaging_events(payload):
     data = json.loads(payload)
 
@@ -37,6 +37,7 @@ def received_message(event):
           % (sender_id, recipient_id, time_of_message))
     print(message)
 
+    seq = message.get("seq", 0)
     is_echo = message.get("is_echo")
     message_id = message.get("mid")
     app_id = message.get("app_id")
@@ -46,11 +47,18 @@ def received_message(event):
     message_attachments = message.get("attachments")
     quick_reply = message.get("quick_reply")
 
+    seq_id = sender_id + ':' + recipient_id
+    if USER_SEQ.get(seq_id, -1) >= seq:
+        print("Ignore duplicated request")
+        return None
+    else:
+        USER_SEQ[seq_id] = seq
+
     if is_echo:
         print("Received echo for message %s and app %s with metadata %s" % (message_id, app_id, metadata))
         return None
     elif quick_reply:
-        quick_reply_payload = quick_reply.payload
+        quick_reply_payload = quick_reply.get('payload')
         print("uick reply for message %s with payload %s" % (message_id, quick_reply_payload))
 
         send_message(sender_id, "Quic reply tapped")
