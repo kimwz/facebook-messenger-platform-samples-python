@@ -21,7 +21,7 @@ def validate():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    payload = request.get_data()
+    payload = request.get_data(as_text=True)
 
     for event in messenger.messaging_events(payload):
         if 'optin' in event:
