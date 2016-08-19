@@ -22,3 +22,5 @@ python server.py
 # default web server port 8080
 ```
 
+### Screenshot
+![](./assets/image.png)
