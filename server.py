@@ -51,7 +51,7 @@ def authorize():
 
     redirect_uri_success = redirect_uri + "&authorization_code=" + auth_code
 
-    return render_template('authorize.html', {
+    return render_template('authorize.html', data={
         'account_linking_token': account_linking_token,
         'redirect_uri': redirect_uri,
         'redirect_uri_success': redirect_uri_success

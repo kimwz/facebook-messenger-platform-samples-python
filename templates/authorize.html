@@ -12,19 +12,19 @@
 
     <div>
       This should be a login page. If the user successfully logs, they should
-      be redirect to this link: <a href="{{ redirect_uri_success }}">Complete Account Link</a>
+      be redirect to this link: <a href="{{ data.redirect_uri_success }}">Complete Account Link</a>
     </div>
 
     <div>
-      Account linking token: {{ account_linking_token }}
+      Account linking token: {{ data.account_linking_token }}
     </div>
 
     <div>
-      Redirect URI: {{ redirect_uri }}
+      Redirect URI: {{ data.redirect_uri }}
     </div>
 
     <div>
-      Redirect URI Successful: {{ redirect_uri_success }}
+      Redirect URI Successful: {{ data.redirect_uri_success }}
     </div>
 
 
